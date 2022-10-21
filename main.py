@@ -1,8 +1,12 @@
 import os
+
+from dotenv import load_dotenv
 from fastapi import FastAPI
+
 from otp.melipayamak import Api
 
 app = FastAPI()
+load_dotenv()
 api = Api(os.getenv("OTP_USERNAME"), os.getenv("OTP_PASSWORD")).sms("soap")
 
 

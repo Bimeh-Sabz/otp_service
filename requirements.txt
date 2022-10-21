@@ -1,4 +1,5 @@
 fastapi==0.45.0
+python-dotenv
 zeep
 uvicorn
 gunicorn
