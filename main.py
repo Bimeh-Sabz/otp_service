@@ -1,9 +1,9 @@
 import os
-
 from fastapi import FastAPI
+from otp.melipayamak import Api
 
 app = FastAPI()
-#name = os.getenv("MY_NAME")
+api = Api(os.getenv("OTP_USERNAME"), os.getenv("OTP_PASSWORD")).sms("soap")
 
 
 @app.get("/")
@@ -12,5 +12,5 @@ async def root():
 
 
 @app.get("/getBasePrice")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+async def get_base_price():
+    return {"price": api.get_credit()}
