@@ -1,6 +1,6 @@
 # OTP SMS SERVICE
-**Based on : `Fast API`** <br/>
-**Service : `Melipayamak`**
+**Based on : Fast API** <br/>
+**Service : Melipayamak**
 
 ## Setup
 #### Install requirements with pip:
