@@ -5,7 +5,15 @@ Accept: application/json
 
 ###
 
+GET http://127.0.0.1:8000/getCredit
+Accept: application/json
+
+###
+
 GET http://127.0.0.1:8000/getBasePrice
 Accept: application/json
 
 ###
+
+POST http://127.0.0.1:8000/sendSMS?msg=hii&number=09127173194
+Accept: application/json
