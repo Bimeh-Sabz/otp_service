@@ -16,6 +16,11 @@ async def root():
     return {"message": "Welcome to Bimeh Sabz OTP Service! What are you locking for ?"}
 
 
+@app.get("/getCredit")
+async def get_credit():
+    return apiSoap.get_credit()
+
+
 @app.get("/getBasePrice")
 async def get_base_price():
     return {"price": api.get_credit()}
