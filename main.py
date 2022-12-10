@@ -6,8 +6,10 @@ from otp.melipayamak import Api
 
 app = FastAPI()
 load_dotenv()
-apiSoap = Api(os.getenv("OTP_USERNAME"), os.getenv("OTP_PASSWORD")).sms("soap")
-apiRest = Api(os.getenv("OTP_USERNAME"), os.getenv("OTP_PASSWORD")).sms("rest")
+
+api = Api(os.getenv("OTP_USERNAME"), os.getenv("OTP_PASSWORD"))
+apiSoap = api.sms("soap")
+apiRest = api.sms("rest")
 _from = os.getenv("OTP_PHONE_NUMBER")
 
 
@@ -37,7 +39,7 @@ async def send_sms(msg: str = "", number: str = ""):
             if re.search("^09[0-9][0-9]{8}$", number):
                 res_id = apiSoap.send(number, _from, msg)
 
-                print(f"INFO: SMS send with id {res_id}")
+                print(f"INFO:     SMS send with id {res_id}")
 
                 if apiSoap.is_delivered(res_id):
                     return {"status": "success", "msg": "done!"}
