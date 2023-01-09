@@ -44,7 +44,7 @@ async def send_sms(msg: str = "", number: str = ""):
                     print(f"INFO:     SMS send with id {res_id} with soap")
                     return {"status": "success", "msg": "done!"}
 
-                except ConnectionError:
+                except:
                     print(f"INFO:     Error while sending SMS with soap service! - id: {res_id} - ConnectionError")
 
                     try:
@@ -52,7 +52,7 @@ async def send_sms(msg: str = "", number: str = ""):
                         print(f"INFO:     SMS send with id {res_id} with rest")
                         return {"status": "success", "msg": "done!"}
 
-                    except ConnectionError:
+                    except:
                         print(f"INFO:     Error while sending SMS with rest service! - id: {res_id} - ConnectionError")
                         return {"status": "error", "msg": "message not delivered!"}
             else:
