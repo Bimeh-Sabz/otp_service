@@ -37,13 +37,23 @@ async def send_sms(msg: str = "", number: str = ""):
             return {"status": "error", "msg": "empty phone number!"}
         else:
             if re.search("^09[0-9][0-9]{8}$", number):
-                res_id = apiSoap.send(number, _from, msg)
+                res_id = ""
 
-                print(f"INFO:     SMS send with id {res_id}")
-
-                if apiSoap.is_delivered(res_id):
+                try:
+                    res_id = apiSoap.send(number, _from, msg)
+                    print(f"INFO:     SMS send with id {res_id} with soap")
                     return {"status": "success", "msg": "done!"}
-                else:
-                    return {"status": "error", "msg": "message not delivered!"}
+
+                except ConnectionError:
+                    print(f"INFO:     Error while sending SMS with soap service! - id: {res_id} - ConnectionError")
+
+                    try:
+                        res_id = apiRest.send(number, _from, msg)
+                        print(f"INFO:     SMS send with id {res_id} with rest")
+                        return {"status": "success", "msg": "done!"}
+
+                    except ConnectionError:
+                        print(f"INFO:     Error while sending SMS with rest service! - id: {res_id} - ConnectionError")
+                        return {"status": "error", "msg": "message not delivered!"}
             else:
                 return {"status": "error", "msg": "wrong phone number"}
